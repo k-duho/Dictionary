@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_132612) do
+ActiveRecord::Schema.define(version: 2022_06_09_103852) do
 
   create_table "board_hash_tags", charset: "utf8mb4", force: :cascade do |t|
     t.integer "board_id"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 2022_05_17_132612) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "github_id", null: false
+    t.string "github_name", null: false
+    t.string "github_email", null: false
+    t.string "avatar_url", null: false
+    t.string "profile_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "auth_token"
+    t.datetime "auth_token_expires_at"
   end
 
 end
