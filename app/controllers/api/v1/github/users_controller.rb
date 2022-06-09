@@ -2,10 +2,12 @@ module Api
   module V1
     module Github
       class UsersController < BaseController
-        def show
-          res = client.get("/users")
+        include ResponseSelector
 
-          render json: { success: true, data: res }
+        def show
+          res = client.get("/users/#{user.github_name}")
+
+          render json: { success: true, data: select_expected_data(res) }
         end
       end
     end
