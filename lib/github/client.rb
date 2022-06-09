@@ -6,31 +6,32 @@ module Github
     GITHUB_API_BASE_URL = "https://api.github.com"
     TIME_OUT_SEC = 5
 
-    attr_reader :client
-
-    def initialize
+    def initialize(auth_token)
+      @auth_token = auth_token
       @client = HTTPClient.new
       configure_client
     end
 
-    def configure_client
-      client.receive_timeout = TIME_OUT_SEC
-    end
-
-    def default_header
-      # NOTE: token 6/8 ~ 7days
-      # TODO: move to ".env"
-      {
-        "Authorization" => "token #{ENV["GITHUB_API_TOKEN"]}"
-      }
-    end
-
-    # path: "/{path}"
+    # NOTE: path = "/{path}"
     def get(path, query_params = {}, header: default_header)
       url = GITHUB_API_BASE_URL + path
       res = client.get(url, query: query_params, header: header)
 
       JSON.parse(res.body)
+    end
+
+    private
+
+    attr_reader :client
+
+    def default_header
+      {
+        "Authorization" => "token #{@auth_token}"
+      }
+    end
+
+    def configure_client
+      client.receive_timeout = TIME_OUT_SEC
     end
   end
 end
