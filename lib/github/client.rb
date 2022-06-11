@@ -17,7 +17,7 @@ module Github
       url = GITHUB_API_BASE_URL + path
       res = client.get(url, query: query_params, header: header)
 
-      JSON.parse(res.body)
+      JSON.parse(res.body, symbolize_names: true)
     end
 
     private

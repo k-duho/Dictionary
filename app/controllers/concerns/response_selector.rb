@@ -1,13 +1,13 @@
 module ResponseSelector
   DEFAULT_KEY_MAP = {
-    "login" => :user_name,
-    "id" => :id,
-    "name" => :name,
-    "company" => :company,
-    "email" => :email,
-    "avatar_url" => :avatar_url,
-    "url" => :profile_url,
-    "created_at" => :created_at
+    login: :user_name,
+    id: :id,
+    name: :name,
+    company: :company,
+    email: :email,
+    avatar_url: :avatar_url,
+    url: :profile_url,
+    created_at: :created_at
   }
 
   def select_expected_data(response, keys = [])
