@@ -5,7 +5,7 @@ module Api
         include ResponseSelector
 
         def show
-          res = client.get("/users/#{user.github_name}")
+          res = client.get("/users/#{github_user.github_name}")
 
           render json: { success: true, data: select_expected_data(res) }
         end
