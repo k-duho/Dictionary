@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_11_140421) do
+ActiveRecord::Schema.define(version: 2022_06_12_132040) do
 
   create_table "board_hash_tags", charset: "utf8mb4", force: :cascade do |t|
     t.integer "board_id"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2022_06_11_140421) do
 
   create_table "keywords", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "mail", null: false
+    t.string "password_digest", null: false
+    t.string "remember_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

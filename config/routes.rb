@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :keywords
+  root to: "users#new"
+
+  resources :users
 
   namespace :api do
     namespace :v1 do
