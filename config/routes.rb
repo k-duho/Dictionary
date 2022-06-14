@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: "users#new"
 
-  resources :users
+  resources :users, only: [:new]
+  post "/login", to: "users#login"
 
   namespace :api do
     namespace :v1 do
