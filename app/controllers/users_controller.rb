@@ -1,16 +1,17 @@
-class UsersController < ApplicationController
+class UsersController < ActionController::Base
+  include UserAuthentication
+
   def new
     @user = User.new
   end
 
   def login
-    @user = User.find_by(mail: login_params[:mail])
-    
+    @user = User.find_by!(mail: login_params[:mail])
     if @user.authenticate(login_params[:password])
-      token = SecureRandom.urlsafe_base64
-      @user.update(remember_token: Digest::SHA256.hexdigest(token.to_s))
-      cookies.permanent[:user_remember_token] = token
+      set_cookie_to_login_user
+      redirect_to dashboards_url and return
     else
+      flash.now[:danger] = "로그인 정보를 확인해주세요."
     end
   end
 
