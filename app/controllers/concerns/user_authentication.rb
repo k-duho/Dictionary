@@ -9,7 +9,8 @@ module UserAuthentication
 
   def authenticate
     current_token = encrypt_sha256(cookies[:user_remember_token])
-    User.find_by(remember_token: current_token).present?
+    @current_user = User.find_by(remember_token: current_token)
+    @current_user.present?
   end
 
   def encrypt_sha256(token)
