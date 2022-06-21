@@ -11,7 +11,8 @@ class UsersController < ActionController::Base
       set_cookie_to_login_user
       redirect_to dashboards_url and return
     else
-      flash.now[:danger] = "로그인 정보를 확인해주세요."
+      flash[:danger] = "로그인 정보를 확인해주세요."
+      redirect_to root_url
     end
   end
 

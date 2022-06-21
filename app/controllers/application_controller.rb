@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user
-    redirect_to new_user_url and return unless authenticate
+    redirect_to root_url and return unless authenticate
   end
 end
