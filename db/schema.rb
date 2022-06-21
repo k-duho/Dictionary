@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_132040) do
+ActiveRecord::Schema.define(version: 2022_06_21_135234) do
 
   create_table "board_hash_tags", charset: "utf8mb4", force: :cascade do |t|
     t.integer "board_id"
@@ -32,10 +32,12 @@ ActiveRecord::Schema.define(version: 2022_06_12_132040) do
     t.string "github_email", null: false
     t.string "avatar_url", null: false
     t.string "profile_url", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "auth_token"
     t.datetime "auth_token_expires_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_github_users_on_user_id"
   end
 
   create_table "keywords", charset: "utf8mb4", force: :cascade do |t|
@@ -53,4 +55,5 @@ ActiveRecord::Schema.define(version: 2022_06_12_132040) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "github_users", "users"
 end
