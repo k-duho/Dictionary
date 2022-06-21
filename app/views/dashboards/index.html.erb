@@ -1,1 +1,5 @@
-<p>Dashboard<p>
+<div id="github-repositories-container">
+  <% @repositories.each do |repo| %>
+    <p><%= repo[:name] %></p>
+  <% end %>
+</div>
