@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_135234) do
+ActiveRecord::Schema.define(version: 2022_06_21_163029) do
 
   create_table "board_hash_tags", charset: "utf8mb4", force: :cascade do |t|
     t.integer "board_id"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2022_06_21_135234) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "github_repositories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "repos_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_github_repositories_on_owner_id"
   end
 
   create_table "github_users", charset: "utf8mb4", force: :cascade do |t|
@@ -55,5 +64,6 @@ ActiveRecord::Schema.define(version: 2022_06_21_135234) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "github_repositories", "github_users", column: "owner_id"
   add_foreign_key "github_users", "users"
 end

@@ -1,0 +1,39 @@
+# NOTE: command
+#       bundle exec ridgepole --config ./config/database.yml --file ./db/Schemafile --apply
+
+create_table "github_repositories", charset: "utf8mb4", force: :cascade do |t|
+  t.string "name", null: false
+  t.string "repos_url", null: false
+  t.integer "remote_repo_id", null: false
+  t.bigint "owner_id", null: false
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.index ["owner_id"], name: "index_github_repositories_on_owner_id"
+end
+
+create_table "github_users", charset: "utf8mb4", force: :cascade do |t|
+  t.integer "github_id", null: false
+  t.bigint "user_id", null: false
+  t.string "github_name", null: false
+  t.string "github_email", null: false
+  t.string "avatar_url", null: false
+  t.string "profile_url", null: false
+  t.string "auth_token"
+  t.datetime "auth_token_expires_at"
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.index ["user_id"], name: "index_github_users_on_user_id"
+end
+
+create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  t.string "name", null: false
+  t.string "mail", null: false
+  t.string "password_digest", null: false
+  t.string "remember_token"
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+end
+
+add_foreign_key "github_repositories", "github_users", column: "owner_id"
+add_foreign_key "github_users", "users"
+
