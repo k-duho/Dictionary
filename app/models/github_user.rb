@@ -1,7 +1,9 @@
 class GithubUser < ActiveRecord::Base
   belongs_to :user
 
-  validates :github_id, presence: true,
+  has_many :github_repositories, foreign_key: :owner_id
+
+  validates :remote_id, presence: true,
                         uniqueness: true
   validates :github_name, presence: true
   validates :github_email, presence: true,
