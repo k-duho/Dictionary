@@ -12,11 +12,10 @@ class SyncRepositoryJob < ApplicationJob
     :id => :remote_id
   }
 
-  def perform(github_user, github_client)
+  def perform(github_user)
     @client = ::Github::Client.new(github_user.auth_token)
 
-    repos = github_client.get("/users/#{github_user.github_name}/repos")
-
+    repos = @client.get("/users/#{github_user.github_name}/repos")
     repos.each do |repo|
       initialized_repo = if GithubRepository.find_by(remote_id: repo[:id])
                            update_github_repo(repo)
@@ -35,8 +34,8 @@ class SyncRepositoryJob < ApplicationJob
 
   private
 
-  def fetch_repositories(github_user, github_client)
-    github_client.get("/users/#{github_user.github_name}/repos")
+  def fetch_repositories(github_user)
+    @client.get("/users/#{github_user.github_name}/repos")
   end
 
   def create_github_repo(repo)

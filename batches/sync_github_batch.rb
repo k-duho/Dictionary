@@ -5,10 +5,6 @@ class SyncGithubBatch
     end
   end
 
-  def initialize
-
-  end
-
   def exec
     GithubUser.all.each do |github_user|
       github_client = init_client(github_user.auth_token)
@@ -20,11 +16,11 @@ class SyncGithubBatch
   private
 
   def sync_github_repository(github_user, github_client)
-    SyncRepositoryJob.perform_now(github_user, github_client)
+    SyncRepositoryJob.perform_later(github_user)
   end
 
   def sync_github_organization(github_user, github_client)
-    SyncOrganizationJob.perform_now(github_user, github_client)
+    SyncOrganizationJob.perform_now(github_user)
   end
 
   def init_client(github_user_token)
