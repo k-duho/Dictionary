@@ -31,6 +31,7 @@ gem 'httpclient'
 gem 'pry-rails'
 gem 'bcrypt'
 gem 'sidekiq'
+gem 'activerecord-import'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

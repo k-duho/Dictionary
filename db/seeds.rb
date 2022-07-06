@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+GithubUser.all.each(&:destroy)
+User.all.each(&:destroy)
 
 user = User.create(
   name: "duho",
@@ -12,8 +14,8 @@ user = User.create(
   password: "password"
 )
 
-user.create_github_user(
-  github_id: "k-duho",
+user.reload.create_github_user(
+  remote_id: 105637809,
   github_name: "k-duho",
   github_email: "dev.kimduho@gmail.com",
   avatar_url: "test",
