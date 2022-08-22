@@ -1,7 +1,9 @@
 class DashboardsController < ApplicationController
   def index
     @github_user = fetch_github_user
+    
     @repositories = fetch_github_user_repos
+    binding.pry
   end
 
   private
