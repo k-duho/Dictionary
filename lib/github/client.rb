@@ -1,12 +1,20 @@
 module Github
   class Client
-    # Github API Doc
-
     # TODO: move to ".env"
     GITHUB_API_BASE_URL = "https://api.github.com"
     TIME_OUT_SEC = 5
 
-    def initialize(auth_token)
+    class << self
+      def get_client
+        new
+      end
+
+      def get_auth_client(auth_token)
+        new(auth_token)
+      end
+    end
+
+    def initialize(auth_token = {})
       @auth_token = auth_token
       @client = HTTPClient.new
       configure_client
@@ -25,6 +33,8 @@ module Github
     attr_reader :client
 
     def default_header
+      return if @auth_token.blank?
+
       {
         "Authorization" => "token #{@auth_token}"
       }
